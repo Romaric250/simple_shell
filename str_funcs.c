@@ -24,7 +24,7 @@ int _strcmp(char *str1, char *str2)
  * @str: string to get len from.
  * Return: len of str
  */
-int _stlen(char *str)
+int _strlen(char *str)
 {
 	int len = 0;
 
