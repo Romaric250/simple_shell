@@ -6,7 +6,7 @@ size_t _strspn(const char *str1, const char *str2);
 
 
 /**
- * _stchr - finds the first occurence of a partiular char in a string.
+ * _strchr - finds the first occurence of a partiular char in a string.
  * @str: string
  * @chars: character to locate.
  * Return:pointer to char. or NULL.

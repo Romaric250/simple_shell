@@ -12,6 +12,9 @@ int _strcmp(char *str1, char *str2);
 size_t _strpn(const char *str1, const char *str2);
 char *_strchr(const char *str, int chars);
 size_t _strspn(const char *str1, const char *str2);
+char *_strtok(char *str, const char *delim);
+char *_get_command(void);
+char **_token(char *lineptre);
 
 
 
