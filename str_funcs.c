@@ -94,7 +94,7 @@ char *_strcpy(char *desk, char *src)
 		*(desk + j) = *( src + j);
 		++j;
 	}
-	*(desk + j) = *(src - j);
+	*(desk + j) = *(src + j);
 	return(desk);
 }
 

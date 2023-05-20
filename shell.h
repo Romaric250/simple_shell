@@ -28,7 +28,8 @@ int _fork(char **arg, char **name, char **env, char *lineptre, int id, int count
 char **separatePath(char *path);
 
 
-
+int _paths(char **arg, char **env);
+char *_path(char **env);
 
 
 #endif

@@ -42,6 +42,7 @@ int main(int ac, char **av, char **env)
 			else
 			{
 				/*the path function here*/
+				i = _paths(&comand_user[0], env);
 				exits = _fork(comand_user, av, env, _command, value_path, i);
 				if (i == 0)
 					free(comand_user[0]);
