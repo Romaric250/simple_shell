@@ -16,7 +16,7 @@ int _fork(char **arg, char **name, char **env, char *lineptre, int id, int count
 {
 	int _status;
 	char *_format = "%s: %d: %s: not found\n";
-	pid_t = child_process;
+	pid_t child_process;
 
 	child_process = fork();
 
@@ -24,7 +24,7 @@ int _fork(char **arg, char **name, char **env, char *lineptre, int id, int count
 	{
 		if (execve(arg[0], arg, env) == -1)
 		{
-			fprintf(sderr, _format, name[0], id, arg[0]);
+			fprintf(stderr, _format, name[0], id, arg[0]);
 			
 			if (!count)
 				free(arg[0]);
@@ -38,7 +38,7 @@ int _fork(char **arg, char **name, char **env, char *lineptre, int id, int count
 	else
 	{
 		wait(&_status);
-		if (WIFEXITED(_status) && WEXITSTATUS(status) ! = 0)
+		if (WIFEXITED(_status) && WEXITSTATUS(_status) != 0)
 			return (WEXITSTATUS(_status));
 	}
 	return (0);

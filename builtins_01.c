@@ -37,7 +37,7 @@ void exit_command(char **arg, char *lineptre, int _exits)
 	{
 		free(lineptre);
 		free(arg);
-		exit(_exits)
+		exit(_exits);
 	}
 	_status = atoi(arg[1]);
 	

@@ -19,16 +19,16 @@ char *_path(char **env)
 		return (NULL);
 	for (i = 5; env[k][j]; j++, k++)
 		;
-	path = malloc(sizeof(char) * (i + 1));
+	paths = malloc(sizeof(char) * (i + 1));
 
-	if (path == NULL)
+	if (paths == NULL)
 		return (NULL);
 
 	for (j = 5, i = 0; env[k][j]; j++, i++)
-		path[i] = env[k][j];
+		paths[i] = env[k][j];
 
 
-	path[i] = '\0';
+	paths[i] = '\0';
 
-	return (path);
+	return (paths);
 }

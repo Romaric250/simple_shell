@@ -73,7 +73,7 @@ size_t _strncmp(char *str1, char *str2, size_t k)
 		if (i != 0)
 			return (i);
 	}
-	return (0)
+	return (0);
 }
 
 
@@ -91,7 +91,7 @@ char *_strcpy(char *desk, char *src)
 	
 	while(*(src + j) != '\0')
 	{
-		*(desk + j) = *( scr + j);
+		*(desk + j) = *( src + j);
 		++j;
 	}
 	*(desk + j) = *(src - j);

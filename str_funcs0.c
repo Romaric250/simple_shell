@@ -2,7 +2,7 @@
 
 size_t _strpn(const char *str1, const char *str2);
 char *_strchr(const char *str, int chars);
-size_t _strspn(const char *str1, const char *str2);
+size_t _strsnp(const char *str1, const char *str2);
 
 
 /**
@@ -14,7 +14,7 @@ size_t _strspn(const char *str1, const char *str2);
 
 char *_strchr(const char *str, int chars)
 {
-	while(*str! = (char)chars)
+	while(*str != (char)chars)
 	{
 		if (!*str++)
 			return (0);
@@ -23,13 +23,13 @@ char *_strchr(const char *str, int chars)
 }
 
 /**
- * _strspn - calculates the lengths of the max seg of the string.
+ * _strsnp - calculates the lengths of the max seg of the string.
  * @str: str to get lenth from.
  * @delim: indicate the char to separate the string into a segment when it is reach.
  * Return: length of the str when the delim point is reached.
  **/
 
-ssize_t _strsnp(const char *str, const char *delim)
+size_t _strsnp(const char *str, const char *delim)
 {
 	size_t val = 0;
 
@@ -53,7 +53,7 @@ char *_strtok(char *str, const char *delim)
 		s = str;
 	else if (!s)
 		return (0);
-	str = s + _strspn(s, delim);
+	str = s + _strsnp(s, delim);
 	s = str + _strpn(str, delim);
 	if(s == str)
 		return (s = 0);
