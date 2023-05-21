@@ -28,11 +28,11 @@ char **_token(char *lineptre)
 	_comand = malloc(sizeof(char *) * (set + 2));
 	if (_comand == NULL)
 		return(NULL);
-	token = _strtok(lineptre, " ");
+	token = _strtok(lineptre, "\n\t\r ");
 	for (k = 0; token != NULL; k++)
 	{
 		_comand[k] = token;
-		token = _strtok(NULL, " ");
+		token = _strtok(NULL, "\n\t\r ");
 	}
 	_comand[k] = NULL;
 	return (_comand);
@@ -50,7 +50,7 @@ char *_get_command(void)
 	char *lineptre = NULL;
 	
 	if (isatty(STDIN_FILENO))
-		write(STDOUT_FILENO, "=>$: ", 2);
+		write(STDOUT_FILENO, ">$: ", 2);
 	if (getline(&lineptre, &user_input, stdin) == -1)
 	{
 		free(lineptre);

@@ -47,20 +47,39 @@ size_t _strsnp(const char *str, const char *delim)
 
 char *_strtok(char *str, const char *delim)
 {
-	static char *s;
+	static char* last_token = NULL;
+    char* token = NULL;
 
-	if(str)
-		s = str;
-	else if (!s)
-		return (0);
-	str = s + _strsnp(s, delim);
-	s = str + _strpn(str, delim);
-	if(s == str)
-		return (s = 0);
-	s = *s ? *s = 0,s + 1 : 0;
-	return(str);
+    if (str != NULL) {
+        last_token = str;
+    } else if (last_token == NULL) {
+        return NULL;
+    }
+
+    token = last_token;
+    while (*last_token != '\0') {
+        const char* d = delim;
+        while (*d != '\0') {
+            if (*last_token == *d) {
+                *last_token = '\0';
+                last_token++;
+                if (token != last_token - 1) {
+                    return token;
+                } else {
+                    token = last_token;
+                    break;
+                }
+            }
+            d++;
+        }
+        if (token != last_token) {
+            return token;
+        }
+        last_token++;
+    }
+
+    return NULL;
 }
-
 /**
  * _strpn - cal the length of the max seg of the string.
  * @str1: string to span through
