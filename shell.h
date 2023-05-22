@@ -29,7 +29,7 @@ int sep_path(char **arg, char **env);
 char *_getuser_command(void);
 void _getenv(char **env);
 char **_getstoken(char *lineptre);
-void _exit_command(char **args, char *lineptr, int _exit);
+void exit_cmd(char **args, char *lineptr, int _exit);
 int _forks(char **arg, char **av, char **env,
 char *lineptre, int id, int count);
 char *_strtok(char *str, const char *delim);
