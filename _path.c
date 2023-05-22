@@ -12,6 +12,7 @@ char *_path(char **env)
 	size_t k = 0;
 	size_t j = 0;
 	size_t i = 5;
+	
 
 	for (k = 0; _strncmp(env[k], "PATH=", 5); k++)
 		;
@@ -22,8 +23,10 @@ char *_path(char **env)
 	paths = malloc(sizeof(char) * (i + 1));
 
 	if (paths == NULL)
+	{
+	
 		return (NULL);
-
+	}
 	for (j = 5, i = 0; env[k][j]; j++, i++)
 		paths[i] = env[k][j];
 

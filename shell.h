@@ -1,7 +1,9 @@
 #ifndef SHELL_H
 #define SHELL_H
-#include<stdio.h>
-#include<stdlib.h>
+#define _GNU_SOURCE
+
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -11,25 +13,22 @@
 
 extern char **environ;
 
-int _strlen(char *str);
-char *_strcpy(char *desk, char *src);
-size_t _strncmp(char *str1, char *str2, size_t k);
-char *_strcat(char *desk, char *src);
-int _strcmp(char *str1, char *str2);
-size_t _strpn(const char *str1, const char *str2);
-char *_strchr(const char *str, int chars);
-size_t _strsnp(const char *str1, const char *str2);
-char *_strtok(char *str, const char *delim);
-char *_get_command(void);
-char **_token(char *lineptre);
-void exit_command(char **arg, char *lineptre, int _exits);
+int _strcmp(char *s1, char *s2);
+size_t _strncmp(char *s1, char *s2, size_t n);
+int _strlen(char *s);
+char *_strcpy(char *dest, char *src);
+char *_strcat(char *dest, char *src);
+int _putchar(char c);
+
+char *_get_path(char **env);
+int _values_path(char **arg, char **env);
+char *_getline_command(void);
 void _getenv(char **env);
-int _fork(char **arg, char **name, char **env, char *lineptre, int id, int count);
-char **separatePath(char *path);
+char **_get_token(char *lineptr);
+void _exit_command(char **args, char *lineptr, int _exit);
+int _fork_fun(char **arg, char **av, char **env,
+char *lineptr, int np, int c);
+char *_strtok(char *str, const char *delim);
 
 
-int _paths(char **arg, char **env);
-char *_path(char **env);
-
-
-#endif
+#endif /* SHELL_H */

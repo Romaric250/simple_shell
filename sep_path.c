@@ -1,37 +1,45 @@
 #include "shell.h"
-
 /**
- * separatePath - separates the path variables into new strings.
- * @path: path variable to be separated.
- * Return: an array of separated path components.
- **/
-char **separatePath(char *path)
+ * _values_path - separate the path in new strings.
+ * @arg: command input of user.
+ * @env: enviroment.
+ * Return:  a pointer to strings.
+ */
+int _values_path(char **arg, char **env)
 {
-	int set = 0;
-	size_t i = 0;
-	char **command = NULL;
-	char *token = NULL;
+	char *token = NULL, *path_rela = NULL, *path_absol = NULL;
+	size_t value_path, command;
+	struct stat stat_lineptr;
 
-	if (path == NULL)
-	return (NULL);
-	while (path[i] != '\0')
+	if (stat(*arg, &stat_lineptr) == 0)
+		return (-1);
+	path_rela = _get_path(env);
+	if (!path_rela)
+		return (-1);
+	token = _strtok(path_rela, ":");
+	command = _strlen(*arg);
+	while (token)
 	{
-		if (path[i] == ':')
-			set++;
-		i++;
-	}
+		value_path = _strlen(token);
+		path_absol = malloc(sizeof(char) * (value_path + command + 2));
+		if (!path_absol)
+		{
+			free(path_rela);
+			return (-1);
+		}
+		path_absol = _strcpy(path_absol, token);
+		_strcat(path_absol, "/");
+		_strcat(path_absol, *arg);
 
-	if ((set + 1) == _strlen(path))
-		return (NULL);
-	command = malloc(sizeof(char *) * (set + 2));
-	if (command == NULL)
-		return (NULL);
-	token = _strtok(path, ":");
-	for (i = 0; token != NULL; i++)
-	{
-		command[i] = token;
-	token = _strtok(NULL, ":");
+		if (stat(path_absol, &stat_lineptr) == 0)
+		{
+			*arg = path_absol;
+			free(path_rela);
+			return (0);
+		}
+		free(path_absol);
+		token = _strtok(NULL, ":");
 	}
-	command[i] = NULL;
-	return (command);
+	free(path_rela);
+	return (-1);
 }

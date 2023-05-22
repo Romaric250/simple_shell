@@ -1,100 +1,192 @@
 #include "shell.h"
 
+
+char *_strchr(const char *s, int c);
+size_t _strspn(const char *s1, const char *s2);
+size_t _strcspn(const char *s1, const char *s2);
+
 /**
- * _strcmp - compares values of two different strings.
- *@str1: string 1
- *@str2: string 2
- *Return: 0
+ *_strcat - copy string to another string.
+ *@dest: char
+ *@src: char
+ *Return: dest
+ *
  */
 
-int _strcmp(char *str1, char *str2)
+char *_strcat(char *dest, char *src)
 {
-	int i;
+	int d = 0;
+	int s = 0;
 
-	for (i = 0; str1[i] != '\0' && str2[i] != '\0'; i++)
+	while (dest[d] != '\0')
 	{
-		if (str1[i] != str2[i])
-			return ((int)str1[i] - str2[i]);
+		d++;
+	}
+	while (src[s] != '\0')
+	{
+		dest[d] = src[s];
+		d++;
+		s++;
+	}
+	dest[d] = '\0';
+	return (dest);
+}
+
+/**
+ * _strcmp - compare the values of a string
+ * @s1: character
+ * @s2: character
+ * Return: 0
+ */
+
+int _strcmp(char *s1, char *s2)
+{
+	int a;
+
+	for (a = 0; s1[a] != '\0' && s2[a] != '\0'; a++)
+	{
+		if (s1[a] != s2[a])
+			return ((int)s1[a] - s2[a]);
 	}
 	return (0);
 }
 
 /**
- * _strlen - gets the length of a string str.
- * @str: string to get len from.
- * Return: len of str
- */
-int _strlen(char *str)
-{
-	int len = 0;
-
-	while (*(str +len) != '\0')
-		len++;
-	return (len);
-}
-
-/**
- * _strcat - concantenate or combines two diffeent strings.
- * @desk: cstring 1;
- * @src: string 2;
- * Return: desk
+ * _strlen - copies the string pointed to by src into dest
+ * @s: A pointer
+ * Return: char pointer to dest
  */
 
-char *_strcat(char *desk, char *src)
+int _strlen(char *s)
 {
-	int a = 0;
-	int b = 0;
-	
-	while (desk[a] != '\0')
-		a++;
-	while (src[b] != '\0')
+	int ch = 0;
+
+	while (*(s + ch) != '\0')
 	{
-		desk[a] = src[b];
-		a++;
-		b++;
+		ch++;
 	}
-	desk[a] = '\0';
-	return (desk);
+
+	return (ch);
 }
 
 /**
- * _strncmp - gets the dif between two strings.
- * @str1: string 1
- * @str2: string 2
- * Return: dif between str1 and str2.
+ *_strncmp -  function that compares two strings.
+ *@s1: string one
+ *@s2: string two
+ *@n: number of characters
+ * Return: diference
  */
 
-size_t _strncmp(char *str1, char *str2, size_t k)
+size_t _strncmp(char *s1, char *s2, size_t n)
 {
 	size_t i, j;
-	for(j = 0; str1[j] != '\0' && j < k; j++)
+
+	for (j = 0; s1[j] != '\0' && j < n; j++)
 	{
-		i = str1[j] - str2[j];
+		i = s1[j] - s2[j];
+
 		if (i != 0)
+		{
 			return (i);
+		}
 	}
 	return (0);
 }
 
-
-
 /**
- * _strcpy - this function copies a string from a pointer into another srting
- * @desk: place to copy string to.
- * @src: place where the string is copied
- * Return: desk
+ * _strcpy - copies the string pointed to by src into dest
+ * @dest: destination of the copy
+ * @src: source of the copy
+ *
+ * Return: char pointer to dest
  */
 
-char *_strcpy(char *desk, char *src)
+char *_strcpy(char *dest, char *src)
 {
-	int j = 0;
-	
-	while(*(src + j) != '\0')
+	int i = 0;
+
+	while (*(src + i) != '\0')
 	{
-		*(desk + j) = *( src + j);
-		++j;
+		*(dest + i) = *(src + i);
+		++i;
 	}
-	*(desk + j) = *(src + j);
-	return(desk);
+	*(dest + i) = *(src + i);
+
+	return (dest);
 }
 
+/**
+ * _strtok - breaks the string s1 into tokens and null-terminates them.
+ * Delimiter-Characters at the beginning and end
+ *of str are skipped. On each subsequent call delim may change.
+ * @str: string to tokenize
+ * @delim: string with the character that delimit srt.
+ * Return: the first/next token if possible, a null-pointer otherwise.
+ **/
+char *_strtok(char *str, const char *delim)
+{
+	static char *p;
+
+	if (str)
+		p = str;
+	else if (!p)
+		return (0);
+	str = p + _strspn(p, delim);
+	p = str + _strcspn(str, delim);
+	if (p == str)
+		return (p = 0);
+	p = *p ? *p = 0, p + 1 : 0;
+	return (str);
+}
+/**
+ * _strcspn - computes the length of the maximum initial segment of the string
+ * pointed to by s1which consists entirely of characters not from the
+ * string pointed to by s2.
+ * @s1: string to check
+ * @s2: string useful to compare
+ * Return: the length of the segment.
+ **/
+size_t _strcspn(const char *s1, const char *s2)
+{
+	size_t ret = 0;
+
+	while (*s1)
+	{
+		if (_strchr(s2, *s1))
+			return (ret);
+		s1++, ret++;
+	}
+	return (ret);
+}
+/**
+ * _strspn - computes the length of the maximum initial segment of the string
+ * pointed to by s1 which consists entirely of characters from the string
+ * pointed to by s2.
+ * @s1: strint to compute the lengh
+ * @s2: string delimit
+ * Return: the length of the segment.
+ **/
+size_t _strspn(const char *s1, const char *s2)
+{
+	size_t ret = 0;
+
+	while (*s1 && _strchr(s2, *s1++))
+		ret++;
+	return (ret);
+}
+/**
+ * _strchr - locates the ﬁrst occurrence of c (converted to a char) in the
+ * string pointed to by s. The terminating null character is considered to be
+ * part of the string.
+ * @s: string
+ * @c: character
+ * Return: a pointer to the located character, or a null pointer
+ * if the character does not occur in the string.
+ **/
+char *_strchr(const char *s, int c)
+{
+	while (*s != (char)c)
+		if (!*s++)
+			return (0);
+	return ((char *)s);
+}

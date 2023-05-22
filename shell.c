@@ -1,64 +1,49 @@
 #include "shell.h"
-
 /**
- * main - min function in the program.
- * @ac: count the number of arguments parsed.
- * @av: represent an arg.
- * @env: environmental variablee.
- * Return: 0.
- **/
-
+ * main - main arguments functions
+ * @ac:count of argumnents
+ * @av: arguments
+ * @env: environment
+ * Return: _exit = 0.
+ */
 int main(int ac, char **av, char **env)
 {
-	int value_path = 0;
-	int exits = 0, i = 0;
-	char *_command = NULL;
-	char **comand_user = NULL;
-	
+	char *getcommand = NULL, **user_command = NULL;
+	int pathValue = 0, _exit = 0, n = 0;
 	(void)ac;
+
 	while (1)
 	{
-		_command = _get_command();
-
-		if (_command)
+		getcommand = _getline_command();
+		if (getcommand)
 		{
-			value_path++;
-
-			comand_user = _token(_command);
-
-			if (!comand_user)
+			pathValue++;
+			user_command = _get_token(getcommand);
+			if (!user_command)
 			{
-				free(_command);
+				free(getcommand);
 				continue;
 			}
-
-			if ((!_strcmp(comand_user[0], "exit")) && comand_user[1] == NULL)
-				exit_command(comand_user, _command, exits);
-			if (!_strcmp(comand_user[0], "env"))
-			{
+			if ((!_strcmp(user_command[0], "exit")) && user_command[1] == NULL)
+				_exit_command(user_command, getcommand, _exit);
+			if (!_strcmp(user_command[0], "env"))
 				_getenv(env);
-			}
-
 			else
 			{
-				/*the path function here*/
-				i = _paths(&comand_user[0], env);
-				exits = _fork(comand_user, av, env, _command, value_path, i);
-				if (i == 0)
-					free(comand_user[0]);
+				n = _values_path(&user_command[0], env);
+				_exit = _fork_fun(user_command, av, env, getcommand, pathValue, n);
+				if (n == 0)
+					free(user_command[0]);
 			}
-			free(comand_user);
+			free(user_command);
 		}
-
 		else
 		{
 			if (isatty(STDIN_FILENO))
-				write(STDOUT_FILENO, "\n", 2);
-			exit(exits);
+				write(STDOUT_FILENO, "\n", 1);
+			exit(_exit);
 		}
-		free(_command);
+		free(getcommand);
 	}
-	return (exits);
+	return (_exit);
 }
-
-
