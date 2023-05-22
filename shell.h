@@ -35,4 +35,4 @@ char *lineptre, int id, int count);
 char *_strtok(char *str, const char *delim);
 char *_pathcommand(char **env);
 
-#endif /* SHELL_H */
+#endif

@@ -1,38 +1,41 @@
 #include "shell.h"
 /**
- * main - main arguments functions
- * @ac:count of argumnents
- * @av: arguments
- * @env: environment
+ * main - main function of the shell project.
+ * @ac argument counter.
+ * @av: arguments to be parsed.
+ * @env: env variable
  * Return: _exit = 0.
  */
 int main(int ac, char **av, char **env)
 {
-	char *getcommand = NULL, **user_command = NULL;
-	int pathValue = 0, _exit = 0, n = 0;
+	char *_command = NULL;
+       char **user_command = NULL;
+	int path = 0;
+        int exits = 0;
+       int k = 0;
 	(void)ac;
 
 	while (1)
 	{
-		getcommand = _getuser_command();
-		if (getcommand)
+		_command = _getuser_command();
+		if (_command)
 		{
-			pathValue++;
-			user_command = _getstoken(getcommand);
+			path++;
+			user_command = _getstoken(_command);
 			if (!user_command)
 			{
-				free(getcommand);
+				free(_command);
 				continue;
 			}
 			if ((!_strcmp(user_command[0], "exit")) && user_command[1] == NULL)
-				exit_cmd(user_command, getcommand, _exit);
+				exit_cmd(user_command, _command, exits);
 			if (!_strcmp(user_command[0], "env"))
 				_getenv(env);
 			else
 			{
-				n = sep_path(&user_command[0], env);
-				_exit = _forks(user_command, av, env, getcommand, pathValue, n);
-				if (n == 0)
+				k = sep_path(&user_command[0], env);
+				exits = _forks(user_command, av, env, _command, path, k);
+				if (k == 0)
 					free(user_command[0]);
 			}
 			free(user_command);
@@ -41,9 +44,9 @@ int main(int ac, char **av, char **env)
 		{
 			if (isatty(STDIN_FILENO))
 				write(STDOUT_FILENO, "\n", 1);
-			exit(_exit);
+			exit(exits);
 		}
-		free(getcommand);
+		free(_command);
 	}
-	return (_exit);
+	return (exits);
 }
