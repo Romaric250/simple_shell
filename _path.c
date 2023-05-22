@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * _path - this functions gets the var from PATH
- * @env: this is an environmental variable.
- * Return: the path value to be be tokenised later with input from user
+ * _pathcommand - gets the var from PATH
+ * @env: env variable.
+ * Return: the path value used for tok()
  */
 
-char *_path(char **env)
+char *_pathcommand(char **env)
 {
-	char *paths = NULL;
+	char *_path = NULL;
 	size_t k = 0;
 	size_t j = 0;
 	size_t i = 5;
@@ -20,18 +20,18 @@ char *_path(char **env)
 		return (NULL);
 	for (i = 5; env[k][j]; j++, k++)
 		;
-	paths = malloc(sizeof(char) * (i + 1));
+	_path = malloc(sizeof(char) * (i + 1));
 
-	if (paths == NULL)
+	if (_path == NULL)
 	{
 	
 		return (NULL);
 	}
 	for (j = 5, i = 0; env[k][j]; j++, i++)
-		paths[i] = env[k][j];
+		_path[i] = env[k][j];
 
 
-	paths[i] = '\0';
+	_path[i] = '\0';
 
-	return (paths);
+	return (_path);
 }

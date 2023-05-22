@@ -14,11 +14,11 @@ int main(int ac, char **av, char **env)
 
 	while (1)
 	{
-		getcommand = _getline_command();
+		getcommand = _getuser_command();
 		if (getcommand)
 		{
 			pathValue++;
-			user_command = _get_token(getcommand);
+			user_command = _getstoken(getcommand);
 			if (!user_command)
 			{
 				free(getcommand);

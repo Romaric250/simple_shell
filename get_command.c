@@ -1,52 +1,52 @@
 #include "shell.h"
 /**
- * _get_path - get variable PATH.
+ * _getspath - get variable PATH.
  * @env: enviromente local
  * Return: value of PATH.
  */
 
-char *_get_path(char **env)
+char *_getspath(char **env)
 {
-	size_t index = 0, var = 0, count = 5;
+	size_t ex = 0, ar = 0, count = 5;
 	char *path = NULL;
 
-	for (index = 0; _strncmp(env[index], "PATH=", 5); index++)
+	for (ex = 0; _strncmp(env[ex], "PATH=", 5); ex++)
 		;
-	if (env[index] == NULL)
+	if (env[ex] == NULL)
 		return (NULL);
 
-	for (count = 5; env[index][var]; var++, count++)
+	for (count = 5; env[ex][ar]; ar++, count++)
 		;
 	path = malloc(sizeof(char) * (count + 1));
 
 	if (path == NULL)
 		return (NULL);
 
-	for (var = 5, count = 0; env[index][var]; var++, count++)
-		path[count] = env[index][var];
+	for (ar = 5, count = 0; env[ex][ar]; ar++, count++)
+		path[count] = env[ex][ar];
 
 	path[count] = '\0';
 	return (path);
 }
 
 /**
- * _getline_command - print "#cisfun$ " and wait for the user type something.
- * Return: line of string input for user
+ * _getuser_command - get command from user.
+ * Return: line of str entered by user.
  */
 
-char *_getline_command(void)
+char *_getuser_command(void)
 {
-	char *lineptr = NULL;
-	size_t charter_user = 0;
+	char *lineptre = NULL;
+	size_t _user = 0;
 
 	if (isatty(STDIN_FILENO))
-		write(STDOUT_FILENO, "$ ", 2);
+		write(STDOUT_FILENO, "$: ", 3);
 
-	if (getline(&lineptr, &charter_user, stdin) == -1)
+	if (getline(&lineptre, &_user, stdin) == -1)
 	{
-		free(lineptr);
+		free(lineptre);
 		return (NULL);
 	}
 
-	return (lineptr);
+	return (lineptre);
 }

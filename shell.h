@@ -24,15 +24,15 @@ int _strcmp(char *s1, char *s2);
 
 char *_strcpy(char *desk, char *src);
 
-char *_get_path(char **env);
+char *_getspath(char **env);
 int _values_path(char **arg, char **env);
-char *_getline_command(void);
+char *_getuser_command(void);
 void _getenv(char **env);
-char **_get_token(char *lineptr);
+char **_getstoken(char *lineptre);
 void _exit_command(char **args, char *lineptr, int _exit);
 int _forks(char **arg, char **av, char **env,
 char *lineptre, int id, int count);
 char *_strtok(char *str, const char *delim);
-
+char *_pathcommand(char **env);
 
 #endif /* SHELL_H */

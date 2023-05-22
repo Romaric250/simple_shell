@@ -1,37 +1,38 @@
 #include "shell.h"
 /**
- * _get_token - get token of string
- * @lineptr: comman user
- * Return: To a pointer
+ * _getstoken - get the torkn from tokenised strings.
+ * @lineptr: command entered by user to be tokenised
+ * Return: pointer
  */
 
-char **_get_token(char *lineptr)
+char **_getstoken(char *lineptre)
 {
-	char **user_command = NULL;
-	char *token = NULL;
+	
 	size_t i = 0;
 	int size = 0;
+	char **user_cmd = NULL;
+        char *token = NULL;
 
-	if (lineptr == NULL)
+	if (lineptre == NULL)
 		return (NULL);
 
-	for (i = 0; lineptr[i]; i++)
+	for (i = 0; lineptre[i]; i++)
 	{
-		if (lineptr[i] == ' ')
+		if (lineptre[i] == ' ')
 			size++;
 	}
-	if ((size + 1) == _strlen(lineptr))
+	if ((size + 1) == _strlen(lineptre))
 		return (NULL);
-	user_command = malloc(sizeof(char *) * (size + 2));
-	if (user_command == NULL)
+	user_cmd = malloc(sizeof(char *) * (size + 2));
+	if (user_cmd == NULL)
 		return (NULL);
 
-	token = _strtok(lineptr, " \n\t\r");
+	token = _strtok(lineptre, " \n\t\r");
 	for (i = 0; token != NULL; i++)
 	{
-		user_command[i] = token;
+		user_cmd[i] = token;
 		token = _strtok(NULL, " \n\t\r");
 	}
-	user_command[i] = NULL;
-	return (user_command);
+	user_cmd[i] = NULL;
+	return (user_cmd);
 }
