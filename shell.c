@@ -30,7 +30,7 @@ int main(int ac, char **av, char **env)
 				_getenv(env);
 			else
 			{
-				n = _values_path(&user_command[0], env);
+				n = sep_path(&user_command[0], env);
 				_exit = _forks(user_command, av, env, getcommand, pathValue, n);
 				if (n == 0)
 					free(user_command[0]);

@@ -25,7 +25,7 @@ int _strcmp(char *s1, char *s2);
 char *_strcpy(char *desk, char *src);
 
 char *_getspath(char **env);
-int _values_path(char **arg, char **env);
+int sep_path(char **arg, char **env);
 char *_getuser_command(void);
 void _getenv(char **env);
 char **_getstoken(char *lineptre);

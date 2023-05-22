@@ -1,45 +1,47 @@
 #include "shell.h"
 /**
- * _values_path - separate the path in new strings.
- * @arg: command input of user.
- * @env: enviroment.
- * Return:  a pointer to strings.
+ * sep_path - divide the path into new strings
+ * @arg: cmd.
+ * @env: env variable.
+ * Return: pointer.
  */
-int _values_path(char **arg, char **env)
+int sep_path(char **arg, char **env)
 {
-	char *token = NULL, *path_rela = NULL, *path_absol = NULL;
-	size_t value_path, command;
-	struct stat stat_lineptr;
+	char *token = NULL;
+       char *path1 = NULL, *path2 = NULL;
+	size_t _path;
+       size_t comand;
+	struct stat lineptre;
 
-	if (stat(*arg, &stat_lineptr) == 0)
+	if (stat(*arg, &lineptre) == 0)
 		return (-1);
-	path_rela = _getspath(env);
-	if (!path_rela)
+	path1 = _getspath(env);
+	if (!path1)
 		return (-1);
-	token = _strtok(path_rela, ":");
-	command = _strlen(*arg);
+	token = _strtok(path1, ":");
+	comand = _strlen(*arg);
 	while (token)
 	{
-		value_path = _strlen(token);
-		path_absol = malloc(sizeof(char) * (value_path + command + 2));
-		if (!path_absol)
+		_path = _strlen(token);
+		path2 = malloc(sizeof(char) * (_path + comand + 2));
+		if (!path2)
 		{
-			free(path_rela);
+			free(path1);
 			return (-1);
 		}
-		path_absol = _strcpy(path_absol, token);
-		_strcat(path_absol, "/");
-		_strcat(path_absol, *arg);
+		path2 = _strcpy(path2, token);
+		_strcat(path2, "/");
+		_strcat(path2, *arg);
 
-		if (stat(path_absol, &stat_lineptr) == 0)
+		if (stat(path2, &lineptre) == 0)
 		{
-			*arg = path_absol;
-			free(path_rela);
+			*arg = path2;
+			free(path1);
 			return (0);
 		}
-		free(path_absol);
+		free(path2);
 		token = _strtok(NULL, ":");
 	}
-	free(path_rela);
+	free(path1);
 	return (-1);
 }
