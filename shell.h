@@ -13,12 +13,16 @@
 
 extern char **environ;
 
+size_t _strpn(const char *str1, const char *str2);
+size_t _strncmp(char *s1, char *s2, size_t x);
+int _strlen(char *str);
+char *_strcat(char *desk, char *src);
+int _strlen(char *str);
+size_t _strspn(const char *str1, const char *str2);
+
 int _strcmp(char *s1, char *s2);
-size_t _strncmp(char *s1, char *s2, size_t n);
-int _strlen(char *s);
-char *_strcpy(char *dest, char *src);
-char *_strcat(char *dest, char *src);
-int _putchar(char c);
+
+char *_strcpy(char *desk, char *src);
 
 char *_get_path(char **env);
 int _values_path(char **arg, char **env);
