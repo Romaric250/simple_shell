@@ -1,41 +1,42 @@
 #include "shell.h"
 /**
- * _fork_fun - function that create a fork
- *@arg: command and values path
- *@av: Has the name of our program
- *@env: environment
- *@lineptr: command line for the user
- *@np: id of proces
- *@c: Checker add new test
+ * _forks - the function creats a forking process
+ *@arg: argument.
+ *@av: program name.
+ *@env: env variable
+ *@lineptre: command entered by user in the terminal
+ *@id: id of proces
+ *@count: new task added.
  *Return: 0 success
  */
 
-int _fork_fun(char **arg, char **av, char **env, char *lineptr, int np, int c)
+int _forks(char **arg, char **av, char **env, char *lineptre, int id, int count)
 {
 	
-	int status;
-	char *format = "%s: %d: %s: not found\n";
+	int _status;
+	pid_t child_process;
+	char *_format = "%s: %d: %s: not found\n";
 
-	child = fork();
+	child_process = fork();
 
-	if (child == 0)
+	if (child_process == 0)
 	{
 		if (execve(arg[0], arg, env) == -1)
 		{
-			fprintf(stderr, format, av[0], np, arg[0]);
-			if (!c)
+			fprintf(stderr, _format, av[0], id, arg[0]);
+			if (!count)
 				free(arg[0]);
 			free(arg);
-			free(lineptr);
+			free(lineptre);
 			exit(errno);
 		}
 	}
 	else
 	{
-		wait(&status);
+		wait(&_status);
 
-		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-			return (WEXITSTATUS(status));
+		if (WIFEXITED(_status) && WEXITSTATUS(_status) != 0)
+			return (WEXITSTATUS(_status));
 	}
 	return (0);
 }
