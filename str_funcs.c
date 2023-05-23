@@ -132,7 +132,7 @@ char *_strtok(char *str, const char *delim)
 	s = str + _strpn(str, delim);
 	if (s == str)
 		return (s = 0);
-	s = *s ? *s = 0,s + 1 : 0;
+	s = *s ? *s = 0, s + 1 : 0;
 	return (str);
 }
 /**

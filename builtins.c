@@ -1,11 +1,17 @@
 #include "shell.h"
+#include <stdlib.h>
+
 /**
- * exit_cmd - the func closes the shell when exit is typed.
+ * exit_cmd - the function closes the shell when exit is typed.
  * @arg: argument.
- * @lineptr: standar input string
+ * @lineptre: standard input string
  * @_exit: exiting value
- * Return: kind of nothing.
+ *
+ * Description: This function is responsible for handling the "exit" command
+ * in the shell. If no argument is provided, it exits with the default exit
+ * value. Otherwise, it exits with the specified exit status.
  */
+
 void exit_cmd(char **arg, char *lineptre, int _exit)
 {
 	int _status = 0;

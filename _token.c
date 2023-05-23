@@ -1,24 +1,28 @@
 #include "shell.h"
+
 /**
- * _getstoken - get the torkn from tokenised strings.
- * @lineptr: command entered by user to be tokenised
- * Return: pointer
+ * _getstoken - get the token from tokenized strings.
+ * @lineptre: command entered by the user to be tokenized
+ * Return: pointer to an array of tokens
+ *
+ * Description: This function takes a command entered by the user and tokenizes
+ * it based on spaces, newlines, tabs, and carriage returns.
+ * It returns an array of pointers to the tokens.
  */
 
 char **_getstoken(char *lineptre)
 {
-	
-	size_t i = 0;
+	size_t j = 0;
 	int size = 0;
 	char **user_cmd = NULL;
-        char *token = NULL;
+	char *token = NULL;
 
 	if (lineptre == NULL)
 		return (NULL);
 
-	for (i = 0; lineptre[i]; i++)
+	for (j = 0; lineptre[j]; j++)
 	{
-		if (lineptre[i] == ' ')
+		if (lineptre[j] == ' ')
 			size++;
 	}
 	if ((size + 1) == _strlen(lineptre))
@@ -28,11 +32,11 @@ char **_getstoken(char *lineptre)
 		return (NULL);
 
 	token = _strtok(lineptre, " \n\t\r");
-	for (i = 0; token != NULL; i++)
+	for (j = 0; token != NULL; j++)
 	{
 		user_cmd[i] = token;
 		token = _strtok(NULL, " \n\t\r");
 	}
-	user_cmd[i] = NULL;
+	user_cmd[j] = NULL;
 	return (user_cmd);
 }

@@ -10,9 +10,9 @@
  *Return: 0 success
  */
 
-int _forks(char **arg, char **av, char **env, char *lineptre, int id, int count)
+int _forks(char **arg, char **av,
+		char **env, char *lineptre, int id, int count)
 {
-	
 	int _status;
 	pid_t child_process;
 	char *_format = "%s: %d: %s: not found\n";
