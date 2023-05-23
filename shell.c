@@ -4,7 +4,7 @@
  * @ac argument counter.
  * @av: arguments to be parsed.
  * @env: env variable
- * Return: _exit = 0.
+ * Return: exits..
  */
 int main(int ac, char **av, char **env)
 {
