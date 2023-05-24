@@ -35,9 +35,9 @@ char *lineptre, int id, int count);
 char *_strtok(char *str, const char *delim);
 char *_pathcommand(char **env);
 
-int interactive(info_t *info);
+/*int interactive(info_t *info);*/
 int is_delim(char c, char *delim);
 int _isalpha(int c);
-int _atoi(const char *s);
+int _atois(const char *str);
 
 #endif

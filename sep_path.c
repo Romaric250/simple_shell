@@ -8,9 +8,9 @@
 int sep_path(char **arg, char **env)
 {
 	char *token = NULL;
-       char *path1 = NULL, *path2 = NULL;
+	char *path1 = NULL, *path2 = NULL;
 	size_t _path;
-       size_t comand;
+	size_t comand;
 	struct stat lineptre;
 
 	if (stat(*arg, &lineptre) == 0)
