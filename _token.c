@@ -34,7 +34,7 @@ char **_getstoken(char *lineptre)
 	token = _strtok(lineptre, " \n\t\r");
 	for (j = 0; token != NULL; j++)
 	{
-		user_cmd[i] = token;
+		user_cmd[j] = token;
 		token = _strtok(NULL, " \n\t\r");
 	}
 	user_cmd[j] = NULL;

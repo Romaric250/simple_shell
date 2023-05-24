@@ -29,15 +29,14 @@ int sep_path(char **arg, char **env);
 char *_getuser_command(void);
 void _getenv(char **env);
 char **_getstoken(char *lineptre);
-void exit_cmd(char **args, char *lineptr, int _exit);
+void exit_cmd(char **args, char *lineptre, int _exit);
 int _forks(char **arg, char **av, char **env,
 char *lineptre, int id, int count);
 char *_strtok(char *str, const char *delim);
 char *_pathcommand(char **env);
 
-int interactive(info_t *info);
-int is_delim(char c, char *delim);
-int _isalpha(int c);
-int _atoi(const char *s);
-
+int _strlen(char *str);
+int _num_id(char *s);
+int find_sign(char *s);
+int _atoi(char *s);
 #endif

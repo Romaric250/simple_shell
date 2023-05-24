@@ -1,97 +1,84 @@
 #include "shell.h"
 
 /**
- * interactive - returns true if shell is interactive mode
- * @info: struct address
- *
- * Return: 1 if interactive mode, 0 otherwise
+ * _num_id - find index where a digit is first found in string
+ * @s: string to search
+ * Return: integer index where digit is first found
  */
 
-int interactive(info_t *info)
+int _num_id(char *s)
 {
-	int result = 0;
-	int i = 0;
+	int j;
+	int len = _strlen(s);
 
-	while (info->readfd <= 2 && isatty(STDIN_FILENO) && i == 0)
+	for (j = 0; j < len; j++)
 	{
-		result = 1;
-		i++;
+		if (s[j] >= '0' && s[j] <= '9')
+			return (j);
 	}
-	return (result);
+	return (-1); /* return -1 if no digits found */
 }
 
 /**
- * is_delim - checks if character is a delimeter
- * @c: the char to check
- * @delim: the delimeter string
- * Return: 1 if true, 0 if false
+ * find_sign - determine if integer is negative
+ * @s: integer
+ * Return: integer 1 or -1
  */
-
-int is_delim(char c, char *delim)
+int find_sign(char *s)
 {
-	int result = 0;
+	int negatives = 0, j = 0, sign = 1;
+	int num_id = _num_id(s);
 
-	while (*delim != '\0')
+	while (j < num_id)
 	{
-		if (*delim == c)
-		{
-			result = 1;
-			break;
-		}
-		delim++;
+		if (s[j++] == '-')
+			negatives++;
 	}
-	return (result);
+
+	if (negatives % 2 != 0)
+		sign = -1;
+
+	return (sign);
 }
 
 /**
- * _isalpha - checks for alphabetic character
- * @c: The character to input
- * Return: 1 if c is alphabetic, 0 otherwise
+ * _atoi - convert string to int
+ * @s: string to convert
+ * Return: integer
  */
 
-int _isalpha(int c)
+int _atoi(char *s)
 {
-	int result = 0;
+	int start_id = _num_id(s);
+	int sign;
+	int digits = 0;
+	int t = 1, j;
+	unsigned int num = 0;
 
-	while (((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-			&& result == 0)
+	if (start_id < 0) /* if no digits found, exit program */
+		return (0);
+
+	sign = find_sign(s);
+
+	while ((s[start_id] >= '0' && s[start_id] <= '9')
+	       && (start_id < _strlen(s))) /* count digits to print */
 	{
-		result = 1;
-		break;
-	}
-	return (result);
-}
-
-/**
- * _atoi - converts a string to an integer
- * @s: the string to be converted
- * Return: 0 if no numbers in string, converted number otherwise
- */
-
-int _atoi(const char *s)
-{
-	int i = 0;
-	int sign = 1;
-	unsigned int result = 0;
-
-	while (s[i] != '\0')
-	{
-		if (s[i] == '-')
-		{
-			sign *= -1;
-		}
-		else if (s[i] >= '0' && s[i] <= '9')
-		{
-			result = result * 10 + (s[i] - '0');
-		}
-		else
-		{
-			break;
-		}
-
-		i++;
+		digits += 1;
+		start_id++;
 	}
 
-	return (sign * result);
-}
+	j = 1;
+	while (j < digits) /* find powers of ten to multiply places */
+	{
+		t *= 10;
+		j++;
+	}
 
+	for (j = _num_id(s); j < (_num_id(s) + digits); j++) /* calculate num */
+	{
+		num += (s[j] - '0') * t;
+		t /= 10;
+	}
+
+	return (num * sign);
+}
