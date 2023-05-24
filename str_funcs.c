@@ -3,7 +3,6 @@
 size_t _strspn(const char *str1, const char *str2);
 char *_strchr(const char *s, int c);
 size_t _strpn(const char *str1, const char *str2);
-
 /**
  *_strcat - concantente two strings.
  *@desk: string 1
