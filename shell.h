@@ -35,8 +35,16 @@ char *lineptre, int id, int count);
 char *_strtok(char *str, const char *delim);
 char *_pathcommand(char **env);
 
+<<<<<<< HEAD
 int _strlen(char *str);
 int _num_id(char *s);
 int find_sign(char *s);
 int _atoi(char *s);
+=======
+/*int interactive(info_t *info);*/
+int is_delim(char c, char *delim);
+int _isalpha(int c);
+int _atois(const char *str);
+
+>>>>>>> 7022f616ef1a73fb5bc1061dc50d55c280553d30
 #endif

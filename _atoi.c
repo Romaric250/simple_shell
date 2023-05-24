@@ -1,6 +1,7 @@
 #include "shell.h"
 
 /**
+<<<<<<< HEAD
  * _num_id - find index where a digit is first found in string
  * @s: string to search
  * Return: integer index where digit is first found
@@ -81,4 +82,39 @@ int _atoi(char *s)
 	}
 
 	return (num * sign);
+=======
+ * _atois - this functition converts an strt to an interger.
+ * @str: the str to convert
+ * Return: the int val of the string.
+ **/
+
+
+int _atois(const char *str)
+{
+	int s = 1;
+	int res = 0, i = 0;
+
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+	{
+		i++;
+	}
+	if (str[i] == '-')
+	{
+		s = -1;
+		i++;
+	}
+	else if (str[i] == '+')
+	{
+		i++;
+	}
+
+
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + (str[i] - '0');
+		i++;
+	}
+
+	return (res * s);
+>>>>>>> 7022f616ef1a73fb5bc1061dc50d55c280553d30
 }

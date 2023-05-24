@@ -22,7 +22,7 @@ void exit_cmd(char **arg, char *lineptre, int _exit)
 		free(arg);
 		exit(_exit);
 	}
-	_status = atoi(arg[1]);
+	_status = _atois(arg[1]);
 
 	free(lineptre);
 	free(arg);

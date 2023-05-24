@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
  * main - main function of the shell project.
- * @ac argument counter.
+ * @ac: argument counter.
  * @av: arguments to be parsed.
  * @env: env variable
  * Return: exits..
@@ -9,10 +9,10 @@
 int main(int ac, char **av, char **env)
 {
 	char *_command = NULL;
-       char **user_command = NULL;
+	char **user_command = NULL;
 	int path = 0;
-        int exits = 0;
-       int k = 0;
+	int exits = 0;
+	int k = 0;
 	(void)ac;
 
 	while (1)
